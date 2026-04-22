@@ -1,157 +1,146 @@
 <script lang="ts">
-	let email = $state('');
-	let status = $state<'idle' | 'submitting' | 'success' | 'error'>('idle');
-	let message = $state('');
-
-	const topoLines = Array.from({ length: 12 }, (_, i) => 60 + i * 40);
-
-	async function handleSubmit(e: SubmitEvent) {
-		e.preventDefault();
-		if (!email || status === 'submitting') return;
-
-		status = 'submitting';
-		message = '';
-
-		try {
-			const res = await fetch('/api/testflight', {
-				method: 'POST',
-				headers: { 'content-type': 'application/json' },
-				body: JSON.stringify({ email })
-			});
-
-			const data = (await res.json().catch(() => ({}))) as { error?: string };
-
-			if (!res.ok) {
-				status = 'error';
-				message = data.error ?? 'TRANSMISSION FAILED';
-				return;
-			}
-
-			status = 'success';
-			message = 'REQUEST LOGGED — CHECK YOUR INBOX';
-			email = '';
-		} catch {
-			status = 'error';
-			message = 'NETWORK UNREACHABLE';
-		}
+	interface Pillar {
+		icon: string;
+		title: string;
+		body: string;
 	}
+
+	const stack = [
+		'SwiftUI',
+		'MapKit',
+		'Firebase',
+		'Google Gemini',
+		'HealthKit',
+		'Sign in with Apple'
+	];
+
+	const pillars: Pillar[] = [
+		{
+			icon: 'route',
+			title: 'AI Route Generation',
+			body: 'Gemini parses a natural-language prompt and returns a structured JSON route — coordinates, summary, difficulty, activity — rendered as a polyline on MapKit.'
+		},
+		{
+			icon: 'my_location',
+			title: 'Live Walk Tracking',
+			body: 'GPS walk sessions with monotonic loop progress, ETA estimation, Open-Meteo weather, and an opt-in HealthKit workout export on completion.'
+		},
+		{
+			icon: 'edit_location_alt',
+			title: 'Custom Route Editor',
+			body: 'SwiftUI bridged to MKMapView for draggable waypoint editing, with MKDirections walking paths debounced and rate-limited under Apple’s GEO throttle.'
+		},
+		{
+			icon: 'cloud_sync',
+			title: 'Offline-First Sync',
+			body: 'LocalPlanManager + CloudPlanManager merge on appear and prefer the richer local checklist, so plans stay usable without connectivity.'
+		}
+	];
 </script>
 
 <section id="sentiero" class="relative overflow-hidden border border-zinc-800 bg-black">
-	<div class="grid grid-cols-1 md:grid-cols-2">
-		<div
-			class="flex flex-col justify-center border-b border-zinc-800 p-8 md:border-r md:border-b-0 md:p-12"
-		>
+	<div
+		class="pointer-events-none absolute -top-32 -right-24 h-64 w-64 bg-[#00FF41] opacity-[0.05] blur-[120px]"
+		aria-hidden="true"
+	></div>
+
+	<header class="flex items-center justify-between border-b border-zinc-800 px-6 py-3 md:px-8">
+		<div class="flex items-center gap-3">
+			<span class="inline-block h-2 w-2 bg-[#00FF41]" aria-hidden="true"></span>
+			<span class="font-label-caps text-zinc-500">FEATURED_PROJECT.APP</span>
+		</div>
+		<span class="font-code-sm tracking-widest text-zinc-600 uppercase">iOS · 2024 —</span>
+	</header>
+
+	<div class="relative space-y-10 p-6 md:p-10">
+		<div class="grid grid-cols-1 gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-start">
 			<div class="space-y-6">
-				<div class="inline-flex items-center gap-2 border border-zinc-800 bg-zinc-900/50 px-3 py-1">
-					<span class="inline-block h-2 w-2 bg-[#00FF41]" aria-hidden="true"></span>
-					<span class="font-code-sm tracking-wider text-zinc-400 uppercase">
-						Native iOS · SwiftUI · MapKit · Firebase · Gemini
-					</span>
+				<div>
+					<span class="font-label-caps text-zinc-500">CASE STUDY</span>
+					<h2 class="font-h1 mt-3 text-white uppercase">
+						<span class="text-[#00FF41]">/</span> SENTIERO
+					</h2>
+					<p class="font-code-sm mt-3 tracking-widest text-zinc-400 uppercase">
+						Intelligent Adventure Planner
+					</p>
 				</div>
 
-				<h2 class="font-h1 text-white uppercase">SENTIERO</h2>
-
-				<p class="font-body-mono max-w-md leading-relaxed text-zinc-400">
-					An iOS hiking and outdoor-routing app that uses Google Gemini to generate natural-language
-					routes and checklists, MapKit for draggable waypoint editing and walking directions, and
-					Firebase for offline-first plan sync across devices.
+				<p class="font-body-mono max-w-xl leading-relaxed text-zinc-300">
+					A native iOS hiking companion that replaces static map databases with a dynamic, AI-driven
+					routing engine. Describe the walk you want — distance, place, style — and Gemini emits a
+					structured trail that Sentiero renders, tracks, and syncs offline-first.
 				</p>
 
-				<div class="flex flex-wrap gap-3">
+				<ul class="flex flex-wrap gap-2" aria-label="Technology stack">
+					{#each stack as tech (tech)}
+						<li
+							class="font-code-sm border border-zinc-800 bg-zinc-950 px-3 py-1 text-zinc-300 uppercase"
+						>
+							{tech}
+						</li>
+					{/each}
+				</ul>
+
+				<div class="flex flex-wrap gap-3 pt-2">
 					<a
 						href="https://github.com/tailornirav/Sentiero"
 						rel="external noopener noreferrer"
 						target="_blank"
-						class="hover-terminal font-code-sm inline-flex items-center gap-2 border border-zinc-700 bg-black px-4 py-2 text-white uppercase transition-colors"
+						class="hover-terminal font-code-sm group inline-flex items-center gap-3 border border-white bg-white px-5 py-3 text-black uppercase transition-colors hover:bg-[#00FF41]"
 					>
-						<span class="material-symbols-outlined text-sm" aria-hidden="true">code</span>
+						<span class="material-symbols-outlined text-lg" aria-hidden="true">code</span>
 						VIEW SOURCE
 					</a>
-				</div>
-
-				<form class="mt-4 flex border border-zinc-800 p-1" onsubmit={handleSubmit}>
-					<label class="sr-only" for="sentiero-email">Email for TestFlight</label>
-					<input
-						id="sentiero-email"
-						type="email"
-						required
-						disabled={status === 'submitting'}
-						bind:value={email}
-						placeholder="ENTER EMAIL FOR TESTFLIGHT"
-						autocomplete="email"
-						class="font-code-sm w-full border-none bg-black px-4 text-white uppercase placeholder-zinc-600 focus:ring-0 focus:outline-none disabled:opacity-50"
-					/>
-					<button
-						type="submit"
-						disabled={status === 'submitting'}
-						class="font-code-sm bg-white px-6 py-2 text-black uppercase transition-colors hover:bg-[#00FF41] disabled:opacity-50"
+					<a
+						href="https://github.com/tailornirav/Sentiero#readme"
+						rel="external noopener noreferrer"
+						target="_blank"
+						class="hover-terminal font-code-sm group inline-flex items-center gap-3 border border-zinc-700 bg-black px-5 py-3 text-white uppercase transition-colors"
 					>
-						{status === 'submitting' ? 'SENDING' : 'REQUEST'}
-					</button>
-				</form>
+						<span class="material-symbols-outlined text-lg" aria-hidden="true">description</span>
+						READ THE CASE STUDY
+					</a>
+				</div>
+			</div>
 
-				{#if status === 'success'}
-					<p class="font-code-sm tracking-wider text-[#00FF41] uppercase">&gt; {message}</p>
-				{:else if status === 'error'}
-					<p class="font-code-sm tracking-wider text-red-400 uppercase">&gt; {message}</p>
-				{/if}
+			<div class="border border-zinc-800 bg-zinc-950/50 p-5 font-mono text-[12px] leading-relaxed">
+				<div class="flex items-center justify-between border-b border-zinc-800 pb-2">
+					<span class="font-label-caps text-zinc-500">SAMPLE PROMPT</span>
+					<span class="font-code-sm tracking-widest text-zinc-600">GEMINI › JSON</span>
+				</div>
+				<p class="mt-3 text-zinc-300">
+					<span class="text-[#00FF41]">&gt;</span> 12 km circular from Durdle Door, moderate difficulty,
+					coastal views, under 3 hours.
+				</p>
+				<pre class="mt-4 overflow-x-auto whitespace-pre text-zinc-400"><span class="text-zinc-600"
+						>// TrekRoute</span
+					>
+{`{
+  "name": "Durdle Door Loop",
+  "distance_km": 11.8,
+  "difficulty": "moderate",
+  "activity": "hike",
+  "polyline": [[50.621, -2.277], …]
+}`}</pre>
 			</div>
 		</div>
 
-		<div class="relative flex min-h-[400px] items-center justify-center bg-zinc-950 p-8">
-			<div
-				class="relative flex aspect-[9/19] w-full max-w-[280px] flex-col overflow-hidden border border-zinc-800 bg-black shadow-2xl"
-			>
-				<div class="flex h-6 items-center justify-between border-b border-zinc-800 px-4">
-					<span class="font-code-sm text-[8px] text-zinc-500">SENTIERO.APP</span>
-					<span class="material-symbols-outlined text-[10px] text-zinc-500" aria-hidden="true">
-						signal_cellular_alt
-					</span>
-				</div>
-
-				<div class="relative flex-1 overflow-hidden">
-					<svg
-						class="absolute inset-0 h-full w-full"
-						viewBox="0 0 280 560"
-						preserveAspectRatio="xMidYMid slice"
+		<ul
+			class="grid grid-cols-1 gap-px border border-zinc-800 bg-zinc-800 sm:grid-cols-2 lg:grid-cols-4"
+			aria-label="Project pillars"
+		>
+			{#each pillars as pillar (pillar.title)}
+				<li class="group flex flex-col gap-3 bg-black p-5 transition-colors hover:bg-zinc-950">
+					<span
+						class="material-symbols-outlined flex h-10 w-10 items-center justify-center border border-zinc-800 text-zinc-500 transition-colors group-hover:border-[#00FF41] group-hover:text-[#00FF41]"
 						aria-hidden="true"
 					>
-						<defs>
-							<radialGradient id="topo-glow" cx="50%" cy="40%" r="60%">
-								<stop offset="0%" stop-color="#00FF41" stop-opacity="0.15" />
-								<stop offset="100%" stop-color="#00FF41" stop-opacity="0" />
-							</radialGradient>
-						</defs>
-						<rect width="280" height="560" fill="#050505" />
-						<rect width="280" height="560" fill="url(#topo-glow)" />
-						{#each topoLines as y (y)}
-							<path
-								d={`M -20 ${y} Q 70 ${y + (y % 80 ? 30 : -30)} 140 ${y + 10} T 300 ${y - 10}`}
-								fill="none"
-								stroke="#1f2937"
-								stroke-width="0.7"
-							/>
-						{/each}
-						<path
-							d="M 40 480 Q 90 400 130 360 T 220 220 T 250 120"
-							fill="none"
-							stroke="#00FF41"
-							stroke-width="1.5"
-							stroke-opacity="0.8"
-						/>
-						<circle cx="40" cy="480" r="3" fill="#00FF41" />
-						<circle cx="250" cy="120" r="3" fill="#00FF41" />
-					</svg>
-
-					<div
-						class="absolute right-4 bottom-4 left-4 border border-[#00FF41] bg-black/80 p-3 backdrop-blur-sm"
-					>
-						<p class="font-code-sm text-[#00FF41] uppercase">Route Calculated</p>
-						<p class="font-code-sm mt-1 text-[10px] text-zinc-400 uppercase">Variance: 0.02%</p>
-					</div>
-				</div>
-			</div>
-		</div>
+						{pillar.icon}
+					</span>
+					<h3 class="font-h3 text-white uppercase">{pillar.title}</h3>
+					<p class="font-code-sm leading-relaxed text-zinc-400">{pillar.body}</p>
+				</li>
+			{/each}
+		</ul>
 	</div>
 </section>
