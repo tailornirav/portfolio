@@ -34,7 +34,24 @@
 	{#snippet entry(item: Experience)}
 		<h3 class="font-h3 mb-2 text-white uppercase">{item.company}</h3>
 		<p class="font-code-sm mb-4 text-zinc-500 uppercase">{item.role}</p>
-		<p class="font-body-mono text-zinc-400">{item.summary}</p>
+
+		{#if item.lede}
+			<p class="font-body-mono mb-4 text-zinc-300">{item.lede}</p>
+		{/if}
+
+		<ul class="font-body-mono space-y-3 text-zinc-400">
+			{#each item.highlights as h (h.label)}
+				<li class="flex gap-3">
+					<span class="mt-[2px] shrink-0 text-[#00FF41]" aria-hidden="true">&gt;</span>
+					<span>
+						<span class="font-h3 text-[11px] tracking-[0.1em] text-white uppercase">
+							{h.label}:
+						</span>
+						<span class="ml-1">{h.body}</span>
+					</span>
+				</li>
+			{/each}
+		</ul>
 	{/snippet}
 </TimelineSection>
 
