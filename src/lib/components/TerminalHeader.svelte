@@ -1,58 +1,74 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import { resolve } from '$app/paths';
-	import type { Pathname } from '$app/types';
+	import { onMount } from 'svelte';
 
-	interface NavLink {
-		href: Pathname;
-		label: string;
-	}
+	const sections = ['work', 'experience', 'skills', 'sentiero'] as const;
+	type SectionId = (typeof sections)[number];
 
-	const links: NavLink[] = [
-		{ href: '/manifesto', label: 'MANIFESTO' },
-		{ href: '/architecture', label: 'ARCHITECTURE' },
-		{ href: '/experience', label: 'EXPERIENCE' },
-		{ href: '/logs', label: 'LOGS' }
-	];
+	let active = $state<SectionId>('work');
 
-	let pathname = $derived(page.url?.pathname ?? '/');
+	onMount(() => {
+		const io = new IntersectionObserver(
+			(entries) => {
+				for (const e of entries) {
+					if (e.isIntersecting && sections.includes(e.target.id as SectionId)) {
+						active = e.target.id as SectionId;
+					}
+				}
+			},
+			{ rootMargin: '-40% 0px -50% 0px', threshold: 0 }
+		);
+
+		for (const id of sections) {
+			const el = document.getElementById(id);
+			if (el) io.observe(el);
+		}
+
+		return () => io.disconnect();
+	});
+
+	const linkBase =
+		"border-b pb-1 font-['Space_Grotesk'] text-xs tracking-widest uppercase transition-all duration-75 md:text-sm";
+	const linkIdle = 'text-zinc-400 border-transparent hover:text-[#00FF41]';
+	const linkActive = 'text-[#00FF41] border-[#00FF41]';
 </script>
 
-<header class="sticky top-0 z-40 border-b border-emerald-500/10 bg-black/90 backdrop-blur">
-	<div
-		class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 text-xs tracking-[0.2em]"
+<nav
+	class="sticky top-0 z-50 flex h-16 w-full items-center justify-between border-b border-zinc-800 bg-black/95 px-4 backdrop-blur md:px-12"
+>
+	<a
+		href="#top"
+		class="font-h2 text-lg font-bold tracking-tighter text-white uppercase"
+		aria-label="Return to top"
 	>
-		<a
-			href={resolve('/')}
-			class="font-mono text-emerald-400 transition-colors hover:text-emerald-300"
-			aria-label="Return to hub"
+		NIRAV TAILOR
+	</a>
+
+	<div class="hidden items-center gap-8 md:flex">
+		<a href="#work" class="{linkBase} {active === 'work' ? linkActive : linkIdle}">WORK</a>
+		<a href="#experience" class="{linkBase} {active === 'experience' ? linkActive : linkIdle}"
+			>EXPERIENCE</a
 		>
-			ARCH_OS_V2.0
-		</a>
+		<a href="#skills" class="{linkBase} {active === 'skills' ? linkActive : linkIdle}">SKILLS</a>
+		<a href="#sentiero" class="{linkBase} {active === 'sentiero' ? linkActive : linkIdle}"
+			>SENTIERO</a
+		>
+	</div>
 
-		<nav aria-label="Primary" class="hidden items-center gap-8 font-mono text-neutral-400 md:flex">
-			{#each links as link (link.href)}
-				{@const active = pathname.startsWith(link.href)}
-				<a
-					href={resolve(link.href)}
-					class="transition-colors hover:text-emerald-300"
-					class:text-emerald-400={active}
-					aria-current={active ? 'page' : undefined}
-				>
-					{#if active}
-						<span class="border border-emerald-500/60 px-2 py-1">{link.label}</span>
-					{:else}
-						{link.label}
-					{/if}
-				</a>
-			{/each}
-		</nav>
-
+	<div class="flex gap-4">
 		<a
-			href={resolve('/connect')}
-			class="border border-neutral-500 px-4 py-2 font-mono text-[0.65rem] tracking-[0.35em] text-neutral-200 transition-colors hover:border-emerald-400 hover:text-emerald-300"
+			href="https://github.com"
+			rel="external noopener noreferrer"
+			target="_blank"
+			class="hover-terminal font-code-sm border border-zinc-800 px-4 py-2 text-xs uppercase transition-colors"
+		>
+			GITHUB
+		</a>
+		<a
+			href="mailto:hello@example.com"
+			rel="external noopener noreferrer"
+			class="hover-terminal font-code-sm border border-white bg-black px-4 py-2 text-xs text-white uppercase transition-colors"
 		>
 			CONNECT
 		</a>
 	</div>
-</header>
+</nav>

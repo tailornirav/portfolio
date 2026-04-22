@@ -1,9 +1,9 @@
-# SYSTEM_ARCHITECT // Portfolio
+# Nirav Tailor // Portfolio
 
-A fully static, terminal-themed portfolio built on **SvelteKit 2 + Svelte 5 runes**,
-styled with **Tailwind CSS v4**, and prerendered for deployment on **Vercel** via
-`@sveltejs/adapter-vercel`. No database, no backend — every route is compiled to
-static HTML at build time.
+A fully static, single-page, terminal-themed portfolio built on **SvelteKit 2 + Svelte 5 runes**,
+styled with **Tailwind CSS v4** (Space Grotesk + Space Mono typography), and prerendered for
+deployment on **Vercel** via `@sveltejs/adapter-vercel`. No database, no API, no server
+functions — the entire site compiles to a single static HTML file at build time.
 
 ## Stack
 
@@ -21,23 +21,22 @@ static HTML at build time.
 ```
 src/
 ├── app.d.ts                    # Global App namespace
-├── app.html                    # HTML shell
+├── app.html                    # HTML shell (fonts preconnected + preloaded)
 ├── lib/
 │   ├── components/             # Atomic, reusable Svelte components
-│   │   ├── ExperienceEntry.svelte
-│   │   ├── Panel.svelte
-│   │   ├── TerminalFooter.svelte
-│   │   └── TerminalHeader.svelte
-│   └── experience.ts           # Experience data + types
-└── routes/                     # File-based routing
-    ├── +layout.svelte          # Header / footer chrome
+│   │   ├── HeroSection.svelte
+│   │   ├── HubSection.svelte
+│   │   ├── SentieroSection.svelte
+│   │   ├── SkillsSection.svelte
+│   │   ├── TimelineSection.svelte   # Generic, used for Experience + Education
+│   │   ├── TerminalHeader.svelte    # Sticky nav with active-section tracking
+│   │   └── TerminalFooter.svelte
+│   └── experience.ts           # Typed data: experiences, education, capabilities
+└── routes/
+    ├── +layout.svelte          # Chrome + global styles
     ├── +layout.ts              # `export const prerender = true`
-    ├── +page.svelte            # The Hub (home)
-    ├── architecture/
-    ├── connect/                # Static contact page (mailto + socials)
-    ├── experience/             # EXPERIENCE_LOG
-    ├── logs/
-    └── manifesto/
+    ├── +page.svelte            # Single-page composition of all sections
+    └── layout.css              # Tailwind v4 @theme + terminal utilities
 ```
 
 Path alias configured in `svelte.config.js`:

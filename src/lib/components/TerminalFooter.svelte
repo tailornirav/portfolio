@@ -1,33 +1,37 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
-
 	const year = new Date().getFullYear();
-	const externalLinks = [
+
+	const links = [
 		{ label: 'GITHUB', href: 'https://github.com' },
 		{ label: 'LINKEDIN', href: 'https://linkedin.com' },
-		{ label: 'SOURCE_CODE', href: 'https://github.com' }
+		{ label: 'SOURCE', href: 'https://github.com' }
 	];
 </script>
 
 <footer
-	class="mt-24 border-t border-emerald-500/10 py-8 font-mono text-[0.65rem] tracking-[0.3em] text-neutral-500"
+	class="mt-24 flex w-full flex-col items-center justify-between gap-4 border-t border-zinc-800 bg-black px-6 py-8 md:flex-row md:px-12"
 >
-	<div
-		class="mx-auto flex max-w-6xl flex-col gap-4 px-6 md:flex-row md:items-center md:justify-between"
-	>
-		<span>&copy; {year} SYSTEM_ARCHITECT // ALL RIGHTS RESERVED</span>
-		<nav aria-label="Footer" class="flex flex-wrap gap-6">
-			{#each externalLinks as link (link.label)}
-				<a
-					href={link.href}
-					class="transition-colors hover:text-emerald-300"
-					rel="external noopener noreferrer"
-					target="_blank">{link.label}</a
-				>
-			{/each}
-			<a href={resolve('/connect')} class="transition-colors hover:text-emerald-300">
-				ENCRYPTED_COMMS
+	<div class="text-[10px] font-bold tracking-widest text-white uppercase">
+		&copy; {year} NIRAV TAILOR // SYSTEMS ARCHITECT
+	</div>
+
+	<div class="flex items-center gap-2 border border-zinc-800 px-3 py-1">
+		<span class="inline-block h-2 w-2 animate-pulse bg-[#00FF41]" aria-hidden="true"></span>
+		<span class="font-code-sm text-[10px] tracking-widest text-zinc-400 uppercase">
+			SYSTEM STATUS: OPERATIONAL.
+		</span>
+	</div>
+
+	<div class="flex gap-6">
+		{#each links as link (link.label)}
+			<a
+				href={link.href}
+				rel="external noopener noreferrer"
+				target="_blank"
+				class="cursor-crosshair text-[10px] tracking-widest text-zinc-500 uppercase transition-colors hover:text-[#00FF41]"
+			>
+				{link.label}
 			</a>
-		</nav>
+		{/each}
 	</div>
 </footer>

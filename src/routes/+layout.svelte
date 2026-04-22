@@ -9,13 +9,11 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<title>SYSTEM_ARCHITECT // Portfolio</title>
-	<meta name="description" content="Edge-first portfolio built on SvelteKit + Supabase." />
 </svelte:head>
 
-<div class="flex min-h-screen flex-col bg-black text-neutral-200">
+<div class="grid-bg flex min-h-screen flex-col bg-black text-white">
 	<TerminalHeader />
-	<main class="mx-auto w-full max-w-6xl grow px-6 py-12">
+	<main class="mx-auto w-full max-w-7xl flex-1 space-y-32 px-4 py-24 md:px-12">
 		{@render children()}
 	</main>
 	<TerminalFooter />
