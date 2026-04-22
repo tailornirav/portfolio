@@ -1,1 +1,2 @@
-// place files you want to import through the `$lib` alias in this folder.
+export type { NavItem, Experience, Project, SkillCategory, SiteConfig } from './types/index.js';
+export { siteConfig, navItems, experiences, projects, skillCategories } from './data/site.js';
