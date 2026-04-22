@@ -1,130 +1,125 @@
-<section
-	id="work"
-	class="grid grid-cols-1 gap-px border border-zinc-800 bg-zinc-800 md:grid-cols-12"
->
-	<div class="flex flex-col justify-between gap-8 bg-black p-8 md:col-span-5">
-		<div>
-			<span class="font-label-caps mb-2 block text-zinc-500">DIGITAL IDENTITY</span>
-			<h2 class="font-h2 mb-6 text-white uppercase">The Hub</h2>
-			<p class="font-code-sm mb-8 text-zinc-400">Direct transmission coordinates.</p>
+<script lang="ts">
+	interface Channel {
+		label: string;
+		value: string;
+		href: string;
+		icon: string;
+		external: boolean;
+	}
 
-			<dl class="space-y-4 font-mono text-sm">
-				<div>
-					<dt class="font-label-caps text-zinc-500">NAME</dt>
-					<dd class="mt-1 text-white">Nirav Tailor</dd>
-				</div>
+	const channels: Channel[] = [
+		{
+			label: 'EMAIL',
+			value: 'me@tailornirav.dev',
+			href: 'mailto:me@tailornirav.dev',
+			icon: 'mail',
+			external: false
+		},
+		{
+			label: 'WEBSITE',
+			value: 'tailornirav.dev',
+			href: 'https://tailornirav.dev',
+			icon: 'language',
+			external: true
+		},
+		{
+			label: 'GITHUB',
+			value: '@tailornirav',
+			href: 'https://github.com/tailornirav',
+			icon: 'code',
+			external: true
+		},
+		{
+			label: 'LINKEDIN',
+			value: '/in/tailornirav',
+			href: 'https://www.linkedin.com/in/tailornirav',
+			icon: 'hub',
+			external: true
+		}
+	];
+</script>
 
-				<div>
-					<dt class="font-label-caps text-zinc-500">EMAIL</dt>
-					<dd class="mt-1">
-						<a
-							href="mailto:me@tailornirav.dev"
-							rel="external noopener noreferrer"
-							class="text-[#00FF41] underline-offset-4 hover:underline"
-						>
-							me@tailornirav.dev
-						</a>
-					</dd>
-				</div>
+<section id="work" class="relative border border-zinc-800 bg-black">
+	<div
+		class="pointer-events-none absolute -top-24 -right-24 h-64 w-64 bg-[#00FF41] opacity-[0.04] blur-[120px]"
+		aria-hidden="true"
+	></div>
 
-				<div>
-					<dt class="font-label-caps text-zinc-500">WEBSITE</dt>
-					<dd class="mt-1">
-						<a
-							href="https://tailornirav.dev"
-							rel="external noopener noreferrer"
-							target="_blank"
-							class="text-white underline-offset-4 hover:text-[#00FF41] hover:underline"
-						>
-							tailornirav.dev
-						</a>
-					</dd>
-				</div>
+	<header class="flex items-center justify-between border-b border-zinc-800 px-6 py-3 md:px-8">
+		<div class="flex items-center gap-3">
+			<span class="inline-block h-2 w-2 animate-pulse bg-[#00FF41]" aria-hidden="true"></span>
+			<span class="font-label-caps text-zinc-500">DIGITAL_IDENTITY.SYS</span>
+		</div>
+		<span class="font-code-sm tracking-widest text-zinc-600 uppercase">$ whoami</span>
+	</header>
 
-				<div>
-					<dt class="font-label-caps text-zinc-500">GITHUB</dt>
-					<dd class="mt-1">
-						<a
-							href="https://github.com/tailornirav"
-							rel="external noopener noreferrer"
-							target="_blank"
-							class="text-white underline-offset-4 hover:text-[#00FF41] hover:underline"
-						>
-							@tailornirav
-						</a>
-					</dd>
-				</div>
-
-				<div>
-					<dt class="font-label-caps text-zinc-500">LINKEDIN</dt>
-					<dd class="mt-1">
-						<a
-							href="https://www.linkedin.com/in/tailornirav"
-							rel="external noopener noreferrer"
-							target="_blank"
-							class="text-white underline-offset-4 hover:text-[#00FF41] hover:underline"
-						>
-							/in/tailornirav
-						</a>
-					</dd>
-				</div>
-			</dl>
+	<div class="relative p-6 md:p-10">
+		<div class="mb-10 max-w-xl">
+			<h2 class="font-h2 text-white uppercase">
+				<span class="text-[#00FF41]">&gt;</span> THE HUB
+			</h2>
+			<p class="font-code-sm mt-4 leading-relaxed text-zinc-400">
+				Direct transmission coordinates. The fastest path into my inbox — no forms, no funnels.
+			</p>
 		</div>
 
-		<a
-			href="mailto:me@tailornirav.dev"
-			rel="external noopener noreferrer"
-			class="hover-terminal font-code-sm group flex w-full items-center justify-center gap-3 border border-white bg-black px-6 py-4 text-white uppercase transition-colors"
+		<ul
+			class="grid grid-cols-1 gap-px border border-zinc-800 bg-zinc-800 sm:grid-cols-2"
+			aria-label="Contact channels"
 		>
-			<span class="material-symbols-outlined text-lg group-hover:text-[#00FF41]" aria-hidden="true">
-				mail
-			</span>
-			OPEN SECURE CHANNEL
-		</a>
-	</div>
+			{#each channels as channel (channel.label)}
+				<li>
+					<a
+						href={channel.href}
+						rel="external noopener noreferrer"
+						target={channel.external ? '_blank' : undefined}
+						class="group relative flex items-center gap-5 bg-black p-5 transition-colors hover:bg-zinc-950"
+					>
+						<span
+							class="material-symbols-outlined flex h-11 w-11 shrink-0 items-center justify-center border border-zinc-800 text-zinc-500 transition-colors group-hover:border-[#00FF41] group-hover:text-[#00FF41]"
+							aria-hidden="true"
+						>
+							{channel.icon}
+						</span>
 
-	<div class="relative bg-black p-8 md:col-span-7">
+						<div class="min-w-0 flex-1">
+							<div class="font-label-caps text-zinc-500 group-hover:text-[#00FF41]">
+								{channel.label}
+							</div>
+							<div class="mt-1 truncate font-mono text-sm text-white group-hover:text-[#00FF41]">
+								{channel.value}
+							</div>
+						</div>
+
+						<span
+							class="material-symbols-outlined shrink-0 text-sm text-zinc-700 transition-all group-hover:translate-x-0.5 group-hover:text-[#00FF41]"
+							aria-hidden="true"
+						>
+							arrow_outward
+						</span>
+					</a>
+				</li>
+			{/each}
+		</ul>
+
 		<div
-			class="absolute inset-0 m-8 border border-zinc-800 bg-[radial-gradient(circle_at_30%_20%,rgba(0,255,65,0.06),transparent_55%),radial-gradient(circle_at_80%_70%,rgba(0,255,65,0.04),transparent_60%)]"
-			aria-hidden="true"
-		></div>
-
-		<svg
-			class="pointer-events-none absolute inset-0 h-full w-full opacity-30 mix-blend-luminosity"
-			viewBox="0 0 400 300"
-			preserveAspectRatio="xMidYMid slice"
-			aria-hidden="true"
+			class="mt-8 flex flex-col items-stretch gap-3 border border-zinc-800 bg-zinc-950/50 p-5 sm:flex-row sm:items-center sm:justify-between"
 		>
-			<defs>
-				<pattern id="hub-lines" width="20" height="20" patternUnits="userSpaceOnUse">
-					<path d="M0 10 L20 10" stroke="#222" stroke-width="0.5" />
-					<path d="M10 0 L10 20" stroke="#222" stroke-width="0.5" />
-				</pattern>
-			</defs>
-			<rect width="400" height="300" fill="url(#hub-lines)" />
-			<polyline
-				points="40,240 120,180 160,200 220,120 280,160 360,80"
-				fill="none"
-				stroke="#333"
-				stroke-width="1"
-			/>
-			<polyline
-				points="20,60 80,90 140,70 200,110 260,90 340,130"
-				fill="none"
-				stroke="#333"
-				stroke-width="1"
-			/>
-			<circle cx="220" cy="120" r="2" fill="#555" />
-			<circle cx="280" cy="160" r="2" fill="#555" />
-		</svg>
-
-		<div class="relative z-10 flex h-full min-h-[320px] items-center justify-center">
-			<div class="space-y-2 text-center">
-				<span class="material-symbols-outlined text-4xl text-zinc-700" aria-hidden="true">
-					qr_code_scanner
-				</span>
-				<p class="font-code-sm tracking-widest text-zinc-500 uppercase">Awaiting Scan</p>
+			<div>
+				<p class="font-label-caps text-zinc-500">STATUS</p>
+				<p class="font-code-sm mt-1 text-zinc-300">
+					<span class="text-[#00FF41]">&gt;</span> Open for senior backend, iOS, and full-stack roles
+					in the UK.
+				</p>
 			</div>
+			<a
+				href="mailto:me@tailornirav.dev?subject=Let%27s%20talk"
+				rel="external"
+				class="hover-terminal font-code-sm group inline-flex items-center justify-center gap-3 border border-white bg-white px-6 py-3 whitespace-nowrap text-black uppercase transition-colors hover:bg-[#00FF41]"
+			>
+				<span class="material-symbols-outlined text-lg" aria-hidden="true">send</span>
+				OPEN SECURE CHANNEL
+			</a>
 		</div>
 	</div>
 </section>
