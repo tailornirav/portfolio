@@ -1,0 +1,26 @@
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	viewBox="0 0 64 64"
+	width="64"
+	height="64"
+	role="img"
+	aria-label="Nirav Tailor"
+>
+	<!-- Bright terminal-green square backdrop (site accent) -->
+	<rect width="64" height="64" fill="#00FF41" />
+
+	<!-- Hand-drawn "nT." signature mark.
+	     Each letter is drawn as a single bezier so the strokes stay clean
+	     even at 16x16 browser-tab size. -->
+	<g fill="none" stroke="#000" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">
+		<!-- n: left stem climbing, hooking over, then dropping into the shoulder -->
+		<path d="M12 46 C 12 38 14 22 19 22 C 22 22 23 26 23 30 L 23 46" />
+
+		<!-- T: tall vertical + a long swooping crossbar that sweeps up to the right -->
+		<path d="M40 46 L 40 18" />
+		<path d="M26 26 C 34 18 48 14 56 20" />
+
+		<!-- final period -->
+		<circle cx="52" cy="46" r="2.6" fill="#000" stroke="none" />
+	</g>
+</svg>

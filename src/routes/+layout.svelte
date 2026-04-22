@@ -1,6 +1,5 @@
 <script lang="ts">
 	import './layout.css';
-	import favicon from '$lib/assets/favicon.svg';
 	import TerminalHeader from '$components/TerminalHeader.svelte';
 	import TerminalFooter from '$components/TerminalFooter.svelte';
 
@@ -8,7 +7,8 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<link rel="mask-icon" href="/favicon.svg" color="#00FF41" />
 </svelte:head>
 
 <div class="grid-bg flex min-h-screen flex-col bg-black text-white">
