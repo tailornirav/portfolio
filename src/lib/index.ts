@@ -1,1 +1,3 @@
-// place files you want to import through the `$lib` alias in this folder.
+// Re-export types and data for convenient access via the $lib alias
+export * from './types/portfolio';
+export * from './data/portfolio';
