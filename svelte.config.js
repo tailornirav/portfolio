@@ -7,15 +7,12 @@ const config = {
 		runes: ({ filename }) => (filename.split(/[/\\]/).includes('node_modules') ? undefined : true)
 	},
 	kit: {
-		adapter: adapter({
-			runtime: 'edge',
-			regions: ['iad1'],
-			split: false
-		}),
+		adapter: adapter(),
 		alias: {
-			$components: 'src/lib/components',
-			$server: 'src/lib/server',
-			$supabase: 'src/lib/supabase'
+			$components: 'src/lib/components'
+		},
+		prerender: {
+			handleHttpError: 'warn'
 		}
 	}
 };

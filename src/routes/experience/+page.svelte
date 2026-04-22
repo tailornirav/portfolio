@@ -1,8 +1,6 @@
 <script lang="ts">
 	import ExperienceEntry from '$components/ExperienceEntry.svelte';
-	import type { PageData } from './$types';
-
-	let { data }: { data: PageData } = $props();
+	import { experiences } from '$lib/experience';
 </script>
 
 <svelte:head><title>EXPERIENCE_LOG // SYSTEM_ARCHITECT</title></svelte:head>
@@ -15,13 +13,13 @@
 	</h1>
 	<div class="mt-6 space-y-1 font-mono text-xs text-neutral-400">
 		<p>&gt; Querying chronological execution path...</p>
-		<p>&gt; {data.experiences.length} records found.</p>
+		<p>&gt; {experiences.length} records found.</p>
 		<p>&gt; Rendering system architecture history...</p>
 	</div>
 </header>
 
 <section class="mt-10 border border-emerald-500/20 bg-neutral-950/40">
-	{#each data.experiences as entry (entry.id)}
+	{#each experiences as entry (entry.id)}
 		<ExperienceEntry {entry} />
 	{/each}
 </section>

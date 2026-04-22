@@ -1,6 +1,5 @@
 <script lang="ts">
-	import type { Experience } from '$supabase/types';
-	import { statusLabel } from '$lib/experience';
+	import { statusLabel, type Experience } from '$lib/experience';
 
 	interface Props {
 		entry: Experience;

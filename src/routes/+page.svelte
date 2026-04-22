@@ -2,9 +2,7 @@
 	import { resolve } from '$app/paths';
 	import Panel from '$components/Panel.svelte';
 	import ExperienceEntry from '$components/ExperienceEntry.svelte';
-	import type { PageData } from './$types';
-
-	let { data }: { data: PageData } = $props();
+	import { experiences } from '$lib/experience';
 
 	const capabilities = [
 		{
@@ -91,22 +89,13 @@
 					architectures. Designed for real-time environment analysis and decentralized pathfinding.
 				</p>
 
-				<form class="mt-6 flex flex-col gap-2 sm:flex-row" onsubmit={(e) => e.preventDefault()}>
-					<label class="sr-only" for="sentiero-email">Email</label>
-					<input
-						id="sentiero-email"
-						name="email"
-						type="email"
-						placeholder="ENTER EMAIL FOR TESTFLIGHT"
-						class="grow border border-emerald-500/30 bg-black/60 px-4 py-3 font-mono text-xs tracking-[0.2em] text-neutral-100 placeholder:text-neutral-500 focus:border-emerald-400 focus:outline-none"
-					/>
-					<button
-						type="submit"
-						class="border border-neutral-300 bg-neutral-100 px-6 py-3 font-mono text-[0.65rem] tracking-[0.35em] text-black transition-colors hover:bg-emerald-300"
-					>
-						REQUEST
-					</button>
-				</form>
+				<a
+					href="mailto:hello@example.com?subject=Sentiero%20TestFlight%20Access"
+					class="mt-6 inline-flex items-center gap-3 border border-neutral-300 bg-neutral-100 px-6 py-3 font-mono text-[0.65rem] tracking-[0.35em] text-black transition-colors hover:bg-emerald-300"
+					rel="external noopener noreferrer"
+				>
+					REQUEST TESTFLIGHT ACCESS
+				</a>
 			</div>
 			<div
 				class="min-h-[160px] w-full min-w-[220px] border border-emerald-500/30 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.12),transparent_60%)] md:w-[260px]"
@@ -142,7 +131,7 @@
 
 	<Panel label="EXPERIENCE HIGHLIGHTS" class="lg:col-span-2">
 		<div class="mt-4 divide-y divide-emerald-500/10">
-			{#each data.experiences.slice(0, 3) as entry (entry.id)}
+			{#each experiences.slice(0, 3) as entry (entry.id)}
 				<ExperienceEntry {entry} />
 			{/each}
 		</div>
