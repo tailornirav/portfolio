@@ -1,14 +1,14 @@
 <script lang="ts">
 	let email = $state('');
+	let submitted = $state(false);
 
 	const topoLines = Array.from({ length: 12 }, (_, i) => 60 + i * 40);
 
-	function mailto(e: SubmitEvent) {
+	function handleSubmit(e: SubmitEvent) {
 		e.preventDefault();
-		const target =
-			`mailto:hello@example.com?subject=Sentiero%20TestFlight%20Access` +
-			(email ? `&body=Please%20add%20${encodeURIComponent(email)}%20to%20TestFlight.` : '');
-		window.location.href = target;
+		if (!email) return;
+		submitted = true;
+		window.open('https://www.linkedin.com/in/tailornirav', '_blank', 'noopener,noreferrer');
 	}
 </script>
 
@@ -32,11 +32,12 @@
 					architectures. Designed for real-time environment analysis and decentralized pathfinding.
 				</p>
 
-				<form class="mt-8 flex border border-zinc-800 p-1" onsubmit={mailto}>
+				<form class="mt-8 flex border border-zinc-800 p-1" onsubmit={handleSubmit}>
 					<label class="sr-only" for="sentiero-email">Email for TestFlight</label>
 					<input
 						id="sentiero-email"
 						type="email"
+						required
 						bind:value={email}
 						placeholder="ENTER EMAIL FOR TESTFLIGHT"
 						autocomplete="email"
@@ -49,6 +50,12 @@
 						REQUEST
 					</button>
 				</form>
+
+				{#if submitted}
+					<p class="font-code-sm mt-4 tracking-wider text-[#00FF41] uppercase">
+						&gt; REQUEST LOGGED — CONTINUE ON LINKEDIN TO CONFIRM.
+					</p>
+				{/if}
 			</div>
 		</div>
 

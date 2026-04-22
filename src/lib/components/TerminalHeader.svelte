@@ -56,7 +56,7 @@
 
 	<div class="flex gap-4">
 		<a
-			href="https://github.com"
+			href="https://github.com/tailornirav"
 			rel="external noopener noreferrer"
 			target="_blank"
 			class="hover-terminal font-code-sm border border-zinc-800 px-4 py-2 text-xs uppercase transition-colors"
@@ -64,8 +64,9 @@
 			GITHUB
 		</a>
 		<a
-			href="mailto:hello@example.com"
+			href="https://www.linkedin.com/in/tailornirav"
 			rel="external noopener noreferrer"
+			target="_blank"
 			class="hover-terminal font-code-sm border border-white bg-black px-4 py-2 text-xs text-white uppercase transition-colors"
 		>
 			CONNECT

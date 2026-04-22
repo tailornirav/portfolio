@@ -2,9 +2,9 @@
 	const year = new Date().getFullYear();
 
 	const links = [
-		{ label: 'GITHUB', href: 'https://github.com' },
-		{ label: 'LINKEDIN', href: 'https://linkedin.com' },
-		{ label: 'SOURCE', href: 'https://github.com' }
+		{ label: 'GITHUB', href: 'https://github.com/tailornirav' },
+		{ label: 'LINKEDIN', href: 'https://www.linkedin.com/in/tailornirav' },
+		{ label: 'SOURCE', href: 'https://github.com/tailornirav/portfolio' }
 	];
 </script>
 

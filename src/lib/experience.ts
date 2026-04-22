@@ -135,6 +135,39 @@ export const experiences: Experience[] = [
 		]
 	},
 	{
+		id: 'lfs',
+		period: '2021',
+		company: 'Linux From Scratch · Custom Wayland OS',
+		role: 'Personal Systems R&D — github.com/tailornirav/lfs',
+		lede: 'Built a complete Linux distribution from source on bare metal — a self-directed deep-dive into compilers, init systems, and the UNIX userspace.',
+		highlights: [
+			{
+				label: 'Build Toolchain',
+				body: 'Authored LFS/BLFS shell scripts that parse package versions directly from source-archive filenames, so upgrading a dependency only touches the download URL — no script edits required.'
+			},
+			{
+				label: 'System Assembly',
+				body: 'Bootstrapped a custom XFS-rooted system with a hand-configured Linux kernel, Sway on Wayland, foot terminal, swaybg, grim/slurp, polkit, D-Bus, and elogind/seatd for a fully-functional modern desktop.'
+			},
+			{
+				label: 'Media Pipeline',
+				body: 'Compiled the entire audio/video stack from source — FFmpeg, PulseAudio, ALSA, Opus/OGG/FLAC/Speex, x264/x265, libvpx, Theora, FDK-AAC, LAME, and SDL2 — tuned with custom CFLAGS per package.'
+			},
+			{
+				label: 'Language Toolchains',
+				body: 'Built Rust, LLVM/Clang, NodeJS, Python (with SQLite), and LuaJIT from source, culminating in an end-to-end source build of Firefox running on the compiled stack.'
+			},
+			{
+				label: 'Networking & Security',
+				body: 'Integrated OpenSSH, OpenVPN, FUSE/SSHFS; automated network configuration and home-directory dotfile sync from a private git remote so a fresh install boots into a personalised, working environment.'
+			},
+			{
+				label: 'Performance',
+				body: 'Tuned MAKEFLAGS and CFLAGS to complete a full source build in ~5 hours on a Ryzen 3400G / 16GB / SSD — 3.5h for LLVM + Rust + Firefox, 1.5h for core LFS and the remaining userspace.'
+			}
+		]
+	},
+	{
 		id: 'freelance-2021',
 		period: '2021',
 		company: 'Independent Contracts',
@@ -182,28 +215,46 @@ export const experiences: Experience[] = [
 
 export const education: Education[] = [
 	{
-		id: 'bu',
-		period: '2016 - 2020',
-		degree: 'BSc (Hons) Software Engineering',
-		institution: 'Bournemouth University'
+		id: 'herts',
+		period: '2024 - 2026',
+		degree: 'BSc (Hons) Computer Science (Information Technology)',
+		institution: 'University of Hertfordshire'
 	}
 ];
 
 export const capabilities: CapabilityGroup[] = [
 	{
-		title: 'Edge & Mobile',
-		items: ['Swift / SwiftUI', 'Objective-C', 'Core Data / Realm', 'Offline-First Sync']
+		title: 'Apple Platform',
+		items: ['Swift / SwiftUI', 'UIKit', 'MapKit', 'Core Data / Realm', 'Offline-First Sync']
 	},
 	{
-		title: 'Distributed Systems',
-		items: ['Docker / K8s', 'gRPC / Protobuf', 'Event Sourcing', 'AWS Architecture']
+		title: 'Cloud & Infra',
+		items: [
+			'Vercel',
+			'Cloudflare',
+			'AWS (ECS / ECR / S3 / SQS)',
+			'Docker / K8s',
+			'Linux & System Administration'
+		]
 	},
 	{
-		title: 'Data & Languages',
-		items: ['Python / Rust', 'PostgreSQL', 'Redis / Memcached', 'GraphQL']
+		title: 'Backend & Data',
+		items: [
+			'Node.js / TypeScript',
+			'Python / Rust',
+			'PostgreSQL / MySQL',
+			'Redis / Memcached',
+			'Firebase & Supabase'
+		]
 	},
 	{
 		title: 'Intelligence',
-		items: ['Gemini API integration', 'CoreML / Vision', 'On-device Inference', 'Vector DBs']
+		items: [
+			'Gemini API integration',
+			'Nvidia Riva (gRPC)',
+			'CoreML / Vision',
+			'On-device Inference',
+			'Vector DBs'
+		]
 	}
 ];

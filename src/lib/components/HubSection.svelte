@@ -11,8 +11,9 @@
 		<div class="space-y-4">
 			<p class="font-code-sm text-zinc-400">Direct transmission coordinates.</p>
 			<a
-				href="mailto:hello@example.com?subject=Contact%20Request"
+				href="https://www.linkedin.com/in/tailornirav"
 				rel="external noopener noreferrer"
+				target="_blank"
 				class="hover-terminal font-code-sm group flex w-full items-center justify-center gap-3 border border-white bg-black px-6 py-4 text-white uppercase transition-colors"
 			>
 				<span
@@ -21,7 +22,7 @@
 				>
 					contactless
 				</span>
-				SAVE CONTACT TO DEVICE
+				CONNECT ON LINKEDIN
 			</a>
 		</div>
 	</div>
