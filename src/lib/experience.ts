@@ -28,25 +28,37 @@ export const experiences: Experience[] = [
 	{
 		id: 'sentiero',
 		period: 'SEPT 2024 - PRESENT',
-		company: 'iOS Architect & Enterprise Developer',
-		role: 'Project — Sentiero (Intelligent Adventure Planner)',
-		lede: 'Architected a native iOS application that replaces static map databases with a dynamic, AI-driven spatial routing engine.',
+		company: 'Sentiero · iOS Hiking & Outdoor-Routing App',
+		role: 'iOS Architect & Enterprise Developer — github.com/tailornirav/Sentiero',
+		lede: 'SwiftUI hiking companion that combines MapKit, Firebase, Google Gemini, and Apple Health to plan, customise, and track outdoor routes — complete with AI-generated trails and checklists, live walk tracking, and offline-first plans.',
 		highlights: [
 			{
-				label: 'GeoAI & Intelligent Routing',
-				body: 'Integrated Google Gemini LLMs to parse natural language constraints and synthesize geographical coordinates, paired with a mathematical terrain difficulty grading system.'
+				label: 'AI Route Generation',
+				body: 'Integrated Google Gemini to parse natural-language prompts and emit structured JSON routes — coordinates, summary, difficulty, and activity type — then rendered as polylines on MapKit alongside AI-generated preparation checklists.'
 			},
 			{
-				label: 'Performance Optimization',
-				body: 'Built the frontend using SwiftUI and Apple MapKit, optimizing background thread processing within an MVVM architecture to render complex topographical polylines at 60 FPS.'
+				label: 'Live Walk Tracking',
+				body: 'Built a MapKit-based home surface with GPS walk tracking, weather (Open-Meteo), monotonic progress for loop routes, ETA estimation, and an optional Apple Health workout export on completion.'
 			},
 			{
-				label: 'Resilient Infrastructure',
-				body: 'Engineered an offline-first dual-storage system using iOS UserDefaults and Firebase NoSQL, ensuring robust app functionality in zero-connectivity environments.'
+				label: 'Custom Route Editor',
+				body: 'Bridged SwiftUI to MKMapView via UIViewRepresentable to support draggable waypoint annotations, with MKDirections walking paths between waypoints — debounced and rate-limited to stay under Apple’s ~50 req/min GEO throttle.'
 			},
 			{
-				label: 'Data Pipelines',
-				body: 'Developed a Python script utilizing GeoPandas and the Ramer-Douglas-Peucker (RDP) algorithm to compress raw OpenStreetMap GPS data by 80% before batch-uploading it to Firestore.'
+				label: 'Auth & Identity',
+				body: 'Implemented Sign in with Apple and anonymous Firebase Auth behind a RootSecurityGate, and namespaced all local storage under per-UID UserDefaults keys so each account has isolated plans and hiking stats on-device.'
+			},
+			{
+				label: 'Offline-First Sync',
+				body: 'Engineered a dual-storage model — LocalPlanManager + CloudPlanManager — that merges on appearance and prefers the richer local checklist when reconciling with Firestore, so plans stay usable without connectivity.'
+			},
+			{
+				label: 'Architecture',
+				body: 'Shipped a modular MVVM SwiftUI app driven by a shared GlobalRouter for cross-tab deep-links (activeTab, routeToFocusOnMap, planNavigationPath), with services cleanly separating Auth, Database, Weather, Gemini, HealthKit, and directions rate-limiting.'
+			},
+			{
+				label: 'Security & Secrets',
+				body: 'Gated Gemini and OpenWeather keys behind a runtime-loaded Secrets.plist (gitignored) surfaced via APIConfig, and scoped Firestore collections (public_routes, users/{uid}/savedRoutes, users/{uid}/activePlans) to per-user ownership.'
 			}
 		]
 	},

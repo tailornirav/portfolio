@@ -1,14 +1,39 @@
 <script lang="ts">
 	let email = $state('');
-	let submitted = $state(false);
+	let status = $state<'idle' | 'submitting' | 'success' | 'error'>('idle');
+	let message = $state('');
 
 	const topoLines = Array.from({ length: 12 }, (_, i) => 60 + i * 40);
 
-	function handleSubmit(e: SubmitEvent) {
+	async function handleSubmit(e: SubmitEvent) {
 		e.preventDefault();
-		if (!email) return;
-		submitted = true;
-		window.open('https://www.linkedin.com/in/tailornirav', '_blank', 'noopener,noreferrer');
+		if (!email || status === 'submitting') return;
+
+		status = 'submitting';
+		message = '';
+
+		try {
+			const res = await fetch('/api/testflight', {
+				method: 'POST',
+				headers: { 'content-type': 'application/json' },
+				body: JSON.stringify({ email })
+			});
+
+			const data = (await res.json().catch(() => ({}))) as { error?: string };
+
+			if (!res.ok) {
+				status = 'error';
+				message = data.error ?? 'TRANSMISSION FAILED';
+				return;
+			}
+
+			status = 'success';
+			message = 'REQUEST LOGGED — CHECK YOUR INBOX';
+			email = '';
+		} catch {
+			status = 'error';
+			message = 'NETWORK UNREACHABLE';
+		}
 	}
 </script>
 
@@ -21,40 +46,55 @@
 				<div class="inline-flex items-center gap-2 border border-zinc-800 bg-zinc-900/50 px-3 py-1">
 					<span class="inline-block h-2 w-2 bg-[#00FF41]" aria-hidden="true"></span>
 					<span class="font-code-sm tracking-wider text-zinc-400 uppercase">
-						Proprietary Spatial Engine - Private Repository
+						Native iOS · SwiftUI · MapKit · Firebase · Gemini
 					</span>
 				</div>
 
 				<h2 class="font-h1 text-white uppercase">SENTIERO</h2>
 
 				<p class="font-body-mono max-w-md leading-relaxed text-zinc-400">
-					Next-generation spatial mapping utilizing Gemini LLMs combined with native SwiftUI
-					architectures. Designed for real-time environment analysis and decentralized pathfinding.
+					An iOS hiking and outdoor-routing app that uses Google Gemini to generate natural-language
+					routes and checklists, MapKit for draggable waypoint editing and walking directions, and
+					Firebase for offline-first plan sync across devices.
 				</p>
 
-				<form class="mt-8 flex border border-zinc-800 p-1" onsubmit={handleSubmit}>
+				<div class="flex flex-wrap gap-3">
+					<a
+						href="https://github.com/tailornirav/Sentiero"
+						rel="external noopener noreferrer"
+						target="_blank"
+						class="hover-terminal font-code-sm inline-flex items-center gap-2 border border-zinc-700 bg-black px-4 py-2 text-white uppercase transition-colors"
+					>
+						<span class="material-symbols-outlined text-sm" aria-hidden="true">code</span>
+						VIEW SOURCE
+					</a>
+				</div>
+
+				<form class="mt-4 flex border border-zinc-800 p-1" onsubmit={handleSubmit}>
 					<label class="sr-only" for="sentiero-email">Email for TestFlight</label>
 					<input
 						id="sentiero-email"
 						type="email"
 						required
+						disabled={status === 'submitting'}
 						bind:value={email}
 						placeholder="ENTER EMAIL FOR TESTFLIGHT"
 						autocomplete="email"
-						class="font-code-sm w-full border-none bg-black px-4 text-white uppercase placeholder-zinc-600 focus:ring-0 focus:outline-none"
+						class="font-code-sm w-full border-none bg-black px-4 text-white uppercase placeholder-zinc-600 focus:ring-0 focus:outline-none disabled:opacity-50"
 					/>
 					<button
 						type="submit"
-						class="font-code-sm bg-white px-6 py-2 text-black uppercase transition-colors hover:bg-[#00FF41]"
+						disabled={status === 'submitting'}
+						class="font-code-sm bg-white px-6 py-2 text-black uppercase transition-colors hover:bg-[#00FF41] disabled:opacity-50"
 					>
-						REQUEST
+						{status === 'submitting' ? 'SENDING' : 'REQUEST'}
 					</button>
 				</form>
 
-				{#if submitted}
-					<p class="font-code-sm mt-4 tracking-wider text-[#00FF41] uppercase">
-						&gt; REQUEST LOGGED — CONTINUE ON LINKEDIN TO CONFIRM.
-					</p>
+				{#if status === 'success'}
+					<p class="font-code-sm tracking-wider text-[#00FF41] uppercase">&gt; {message}</p>
+				{:else if status === 'error'}
+					<p class="font-code-sm tracking-wider text-red-400 uppercase">&gt; {message}</p>
 				{/if}
 			</div>
 		</div>
