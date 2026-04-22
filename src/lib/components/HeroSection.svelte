@@ -17,8 +17,12 @@
 
 		<div class="border-l-4 border-[#00FF41] bg-zinc-900/30 py-2 pl-6">
 			<p class="font-body-mono leading-relaxed text-zinc-300">
-				I believe in offline-first resilience... I architect systems that survive zero-connectivity
-				environments, ensuring robust performance regardless of network conditions.
+				Highly motivated and versatile Software Engineer transitioning into the UK market, backed by
+				progressive industry experience in backend systems, full-stack web development, and native
+				mobile architecture. Proven track record of delivering enterprise-grade solutions, ranging
+				from real-time data pipelines to AI-driven edge applications. A proactive problem-solver who
+				excels at independent architectural challenges, writing maintainable code, and designing
+				logical, highly scalable systems.
 			</p>
 		</div>
 	</div>
