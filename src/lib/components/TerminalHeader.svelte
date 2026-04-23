@@ -64,7 +64,7 @@
 			GITHUB
 		</a>
 		<a
-			href="https://www.linkedin.com/in/tailornirav"
+			href="https://www.linkedin.com/in/tnirav"
 			rel="external noopener noreferrer"
 			target="_blank"
 			class="hover-terminal font-code-sm border border-white bg-black px-4 py-2 text-xs text-white uppercase transition-colors"

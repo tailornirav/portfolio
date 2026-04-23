@@ -3,7 +3,7 @@
 
 	const links = [
 		{ label: 'GITHUB', href: 'https://github.com/tailornirav' },
-		{ label: 'LINKEDIN', href: 'https://www.linkedin.com/in/tailornirav' },
+		{ label: 'LINKEDIN', href: 'https://www.linkedin.com/in/tnirav' },
 		{ label: 'SOURCE', href: 'https://github.com/tailornirav/portfolio' }
 	];
 </script>

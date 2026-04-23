@@ -31,8 +31,8 @@
 		},
 		{
 			label: 'LINKEDIN',
-			value: '/in/tailornirav',
-			href: 'https://www.linkedin.com/in/tailornirav',
+			value: '/in/tnirav',
+			href: 'https://www.linkedin.com/in/tnirav',
 			icon: 'hub',
 			external: true
 		}
